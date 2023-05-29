@@ -20,12 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y!sq@dwb%3ah_ve65bt*r52&%t+^ybd&2a)uw5v+)@$g89)k%t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,6 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_cleanup',
+    # "django_cleanup.apps.CleanupConfig",
+    "core",
+    "authentication",
 ]
 
 MIDDLEWARE = [
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'phoenix.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +126,21 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+from . import server_settings
+
+TIME_ZONE = server_settings.TIME_ZONE
+
+SITE_URL=server_settings.SITE_URL
+
+STATIC_ROOT=server_settings.STATIC_ROOT
+MEDIA_ROOT=server_settings.MEDIA_ROOT
+STATIC_URL =server_settings.STATIC_URL
+MEDIA_URL =  server_settings.MEDIA_URL
+ADMIN_URL=server_settings.ADMIN_URL
+QRCODE_URL=server_settings.QRCODE_URL
+STATICFILES_DIRS=server_settings.STATICFILES_DIRS
+SECRET_KEY=server_settings.SECRET_KEY
+ALLOWED_HOSTS=server_settings.ALLOWED_HOSTS
+
